@@ -1,19 +1,19 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-var special = ['@', '%', '+', '/', "'", '!', '#', '$', '^', '?', ':', ',', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.'];
+const upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+const lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const special = ['@', '%', '+', '/', "'", '!', '#', '$', '^', '?', ':', ',', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.'];
 
 function questions() {
   var isValid = false;
   do{
-    var length = prompt("Choose password length that is between 8 and 128 characters");
-    var askNumbers = confirm("Do you want the password to include numbers?");
-    var askUpperCase = confirm("Do you want the password to include uppercase letters?")
-    var askLowerCase = confirm("Do you want the password to include lowercase numbers?")
-    var askSpecial = confirm("Do you want the password to include special characters?")
+    const length = prompt("Choose password length that is between 8 and 128 characters");
+    const askNumbers = confirm("Do you want the password to include numbers?");
+    const askUpperCase = confirm("Do you want the password to include uppercase letters?")
+    const askLowerCase = confirm("Do you want the password to include lowercase numbers?")
+    const askSpecial = confirm("Do you want the password to include special characters?")
     var responses = {
       length: length,
       askNumbers: askNumbers,
@@ -41,12 +41,28 @@ function generatePassword(){
     for (var i of numbers)
     possibleCombo.push(i);
   }
-}
-  if (passwordOptions.askUowerCase){
+
+  if (passwordOptions.askUpperCase){
     for (var i of upperCase)
     possibleCombo.push(i);
   }
 
+  if (passwordOptions.askLowerCase){
+    for (var i of lowerCase)
+    possibleCombo.push(i);
+  }
+
+  if (passwordOptions.askSpecial){
+    for (var i of special)
+    possibleCombo.push(i);
+  }
+
+  for (var i = 0; i < passwordOptions.length; i++) {
+    finalPassword += possibleCombo[Math.floor(Math.random() * possibleCombo.length)];
+  }
+ 
+  return finalPassword;
+}
 
 // Write password to the #password input
 function writePassword() {
